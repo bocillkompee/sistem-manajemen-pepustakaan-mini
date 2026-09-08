@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Katalog</title>
+    <title>Books</title>
 
+    <!-- Tailwind -->
     <link href="./src/output.css" rel="stylesheet">
 
+    <!-- Iconify -->
     <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
 
     <style>
@@ -65,10 +67,11 @@
             transition: opacity 0.4s ease;
         }
     </style>
-
 </head>
 
+
 <body class="bg-[#001642]">
+
 
     <nav id="navbar" class="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-[#001642] px-20 py-6 transition-all duration-300 ease-in-out">
         <div id="navbar-logo" class="text-3xl font-semibold tracking-wider text-white transition-all duration-300">
@@ -76,6 +79,7 @@
         </div>
 
         <div id="navbar-search" class="flex w-[300px] items-center rounded-2xl bg-white px-5 py-2 transition-all duration-300">
+
             <iconify-icon
                 icon="bi:search"
                 class="mr-2 text-xl text-gray-500">
@@ -85,27 +89,37 @@
                 id="searchInput"
                 type="text"
                 placeholder="Search book..."
-                class="w-full bg-transparent text-sm outline-none"
-            >
+                class="w-full bg-transparent text-sm outline-none">
+
         </div>
 
-        <div id="navbar-menu" class="flex gap-8 text-sm font-semibold text-white">
-            <a href="homePage.html"class="group relative py-2 transition-colors duration-300 hover:text-[#DDB967]">
+        <div id="navbar-menu" class="flex gap-6 text-sm font-semibold text-white transition-all duration-300">
+            <a
+                href="#Home"
+                class="transition hover:text-[#DDB967]">
                 Home
-                <span class="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-[#DDB967] transition-all duration-300 group-hover:w-full"></span>
             </a>
 
-            <a href="katalog.html"
-            class="group relative py-2 transition-colors duration-300 hover:text-[#DDB967]">
+            <a
+                href="#Catalog"
+                class="transition hover:text-[#DDB967]">
                 Catalog
-                <span class="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-[#DDB967] transition-all duration-300 group-hover:w-full"></span>
+            </a>
+
+            <a
+                href="#arrival"
+                class="transition hover:text-[#DDB967]">
+                New Arrival
             </a>
         </div>
+ 
     </nav>
 
-    <div class="bg-[#001642] px-12 pb-12 pt-24">
+    <main class="bg-[#001642] px-12 pb-12 pt-24">
+
         <div class="flex min-h-[600px] overflow-hidden rounded-t-2xl bg-white shadow-md">
             <aside class="w-[220px] shrink-0 bg-zinc-100 px-5 py-8">
+
                 <div class="mb-8 flex flex-col items-center">
                     <div class="h-[74px] w-[74px] overflow-hidden rounded-full">
                         <img
@@ -117,20 +131,21 @@
                 </div>
 
                 <div class="space-y-1">
-                    <a href="#" onclick="showDashboard()" class="sidebar-menu flex items-center gap-3 rounded-lg px-4 py-3 text-[14px] text-gray-700 bg-[#001642] text-white">
+
+                    <a href="#" class="sidebar-menu flex items-center gap-3 rounded-lg px-4 py-3 text-[14px] text-gray-700 bg-[#001642] text-white">
                         <iconify-icon
                             icon="circum:view-board"
                             class="text-[21px]"
                         ></iconify-icon>
-                        <span>Dashboard</span>
+                        <span>My Kindle Board</span>
                     </a>
 
-                    <a href="#" onclick="showAddBook()" class="sidebar-menu flex items-center gap-3 rounded-lg px-4 py-3 text-[14px] text-gray-700 transition-all duration-200">
+                    <a href="#" class="sidebar-menu flex items-center gap-3 rounded-lg px-4 py-3 text-[14px] text-gray-700 transition-all duration-200">
                         <iconify-icon
-                            icon="boxicons:book-add"
+                            icon="solar:bookmark-outline"
                             class="text-[21px]"
                         ></iconify-icon>
-                        <span>Add new books</span>
+                        <span>Saved</span>
                     </a>
 
                     <a href="#" class="sidebar-menu flex items-center gap-3 rounded-lg px-4 py-3 text-[14px] text-gray-700 transition-all duration-200">
@@ -164,18 +179,11 @@
                         ></iconify-icon>
                         <span>Logout</span>
                     </a>
+
                 </div>
             </aside>
-            
-            <section id="searchSection" class="mx-20 my-10 hidden">
-                <h2 class="serif mb-6 text-3xl font-semibold text-gray-800">
-                    Search Result
-                </h2>
 
-                <div id="searchResults" class="grid grid-cols-6 gap-x-4 gap-y-5"></div>
-            </section>
-
-            <section id="dashboard" class="min-w-0 flex-1 p-10">
+            <section class="min-w-0 flex-1 p-10">
                 <div> 
                     <h2 class="serif mb-4 text-3xl font-semibold text-gray-800">
                         Books you read last
@@ -183,6 +191,7 @@
 
                     <div id="last-read-books" class="flex gap-[18px] overflow-x-auto px-[2px] pb-[30px] pt-[40px] pr-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     </div>
+
                 </div>
 
                 <div class="mt-7">
@@ -190,7 +199,6 @@
                         <h2 class="serif text-3xl font-semibold text-gray-800">
                             Recommend
                         </h2>
-
                         <a href="#" class="flex items-center text-[14px] text-[#34566c] gap-1">
                             See All
                             <iconify-icon
@@ -200,9 +208,10 @@
                         </a>
                     </div>
 
-                    <div id="recommend-books" class="grid grid-cols-6 gap-x-4 gap-y-5"></div>
+                    <div id="recommend-books" class="grid grid-cols-6 gap-x-4 gap-y-5">
+                    </div>
+
                 </div>
-                
                 <div class="mt-8">
                     <h2 class="serif mb-3 text-3xl font-semibold text-gray-800">
                         Categories
@@ -224,6 +233,7 @@
                     </div>
                 </div>
 
+
                 <div class="mt-8">
                     <div class="mb-4 flex items-center justify-between">
                         <h2 class="serif text-3xl font-semibold text-gray-800">
@@ -238,162 +248,12 @@
                             ></iconify-icon>
                         </a>
                     </div>
-                    
-                    <div id="collections" class="grid grid-cols-4 gap-4">
+                    <div
+                        id="collections"
+                        class="grid grid-cols-4 gap-4">
                     </div>
                 </div>
-            </section>
 
-            <section id="addBookPage" class="hidden min-w-0 flex-1 bg-white p-10">
-                <div class="mb-8 pb-6">
-                    <h1 class="serif text-4xl font-semibold text-gray-800">
-                        Add New Book
-                    </h1>
-    
-                    <p class="mt-2 text-sm text-gray-500">
-                        Add a new book to your library collection
-                    </p>
-                </div>
-    
-                <form id="addBookForm">
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="col-span-2">
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Image URL
-                            </label>
-    
-                            <input
-                                type="url"
-                                placeholder="Enter image URL"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#001642]"
-                            >
-                        </div>
-
-                        <div class="col-span-2">
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Book Name
-                            </label>
-    
-                            <input
-                                type="text"
-                                placeholder="Enter book title"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#001642]"
-                            >
-                        </div>
-
-                        <div>
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Author
-                            </label>
-    
-                            <input
-                                type="text"
-                                placeholder="Enter author name"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#001642]"
-                            >
-                        </div>
-
-                        <div>
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Category
-                            </label>
-    
-                            <select class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:border-[#001642]">
-                                <option value="">Select category</option>
-                                <option>Novel</option>
-                                <option>Romance</option>
-                                <option>Fantasy</option>
-                                <option>Science</option>
-                                <option>History</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Publisher
-                            </label>
-    
-                            <input
-                                type="text"
-                                placeholder="Enter publisher name"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#001642]"
-                            >
-                        </div>
-
-                        <div>
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Year
-                            </label>
-    
-                            <input
-                                type="number"
-                                placeholder="Publication year"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#001642]"
-                            >
-                        </div>
-
-                        <div>
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Pages
-                            </label>
-    
-                            <input
-                                type="number"
-                                placeholder="Number of pages"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#001642]"
-                            >
-                        </div>
-
-                        <div>
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Stock
-                            </label>
-    
-                            <input
-                                type="number"
-                                placeholder="Stock quantity"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#001642]"
-                            >
-                        </div>
-
-                        <div>
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Rating
-                            </label>
-    
-                            <select class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:border-[#001642]">
-                                <option value="">Select rating</option>
-                                <option>5.0</option>
-                                <option>4.5</option>
-                                <option>4.0</option>
-                                <option>3.5</option>
-                                <option>3.0</option>
-                            </select>
-                        </div>
-
-                        <div class="col-span-2">
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Description
-                            </label>
-    
-                            <textarea
-                                rows="5"
-                                placeholder="Enter book description..."
-                                class="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#001642]"
-                            ></textarea>
-                        </div>
-                    </div>
-    
-                    <div class="mt-8 flex justify-end gap-3">
-                        <button type="button" onclick="cancelAddBook()" class="rounded-lg border border-gray-300 px-8 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-100">
-                            Cancel
-                        </button>
-    
-                        <button type="submit" class="rounded-lg bg-[#001642] px-8 py-3 text-sm font-semibold text-white transition hover:bg-[#06245C]">
-                            Add Book
-                        </button>
-                    </div>
-                </form>
             </section>
         </div>
 
@@ -401,30 +261,12 @@
         </div>
 
         <aside id="bookDetail" class="fixed right-0 top-0 z-50 h-full w-full max-w-md translate-x-full overflow-y-auto bg-[#06245C] text-white shadow-2xl transition-transform duration-300">
-            <div class="absolute right-5 top-5 flex items-center gap-2">
-                <button id="editButton"  type="button"  title="Edit Book"  class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20">
-                    <iconify-icon
-                        icon="material-symbols:edit-outline-rounded"
-                        class="text-lg">
-                    </iconify-icon>
-                </button>
+            <button onclick="closeBookDetail()" class="absolute right-5 top-5 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-2xl text-white transition hover:bg-white/20">
+                &times;
+            </button>
 
-                <button id="deleteButton" type="button" title="Delete Book" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-red-500/30 hover:text-red-300">
-                    <iconify-icon
-                        icon="material-symbols:delete-outline-rounded"
-                        class="text-lg">
-                    </iconify-icon>
-                </button>
 
-                <button id="closeButton" type="button" title="Close" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20">
-                    <iconify-icon 
-                        icon="material-symbols:close-rounded"
-                        class="iconify text-lg" >
-                    </iconify-icon>
-                </button>
-            </div>
-
-            <div class="px-7 pb-10 pt-20">
+            <div class="px-7 pb-10 pt-14">
                 <div class="mx-auto mb-6 h-[240px] w-[155px] overflow-hidden rounded-lg bg-white p-1 shadow-xl">
                     <img
                         id="detailImage"
@@ -433,7 +275,6 @@
                         class="h-full w-full object-cover"
                     >
                 </div>
-
                 <div class="text-center">
                     <h2 id="detailTitle" class="text-2xl font-semibold leading-tight">
                         -
@@ -445,12 +286,14 @@
                 </div>
 
                 <div class="mt-4 flex items-center justify-center gap-2">
+
                     <div id="detailRatingStars" class="flex items-center gap-0.5 text-yellow-400">
                     </div>
 
                     <span id="detailRating" class="text-sm font-medium text-white/80">
                         0.0
                     </span>
+
                 </div>
 
                 <div class="my-7 grid grid-cols-3 border-y border-white/10 py-5 text-center">
@@ -458,24 +301,25 @@
                         <p id="detailPages" class="text-sm font-semibold">
                             -
                         </p>
+
                         <span class="mt-1 block text-[11px] text-white/50">
                             Pages
                         </span>
                     </div>
-
                     <div>
                         <p id="detailReviews" class="text-sm font-semibold">
                             -
                         </p>
+
                         <span class="mt-1 block text-[11px] text-white/50">
                             Review
                         </span>
                     </div>
-
                     <div>
                         <p id="detailCategory" class="text-sm font-semibold">
                             -
                         </p>
+
                         <span class="mt-1 block text-[11px] text-white/50">
                             Category
                         </span>
@@ -494,6 +338,7 @@
 
                 <button id="readButton" class="mt-8 flex w-full items-center justify-center gap-2 rounded-lg bg-blue-500 px-5 py-3 text-sm font-semibold transition hover:bg-blue-400">
                     Read Now
+
                     <span class="iconify text-lg" data-icon="material-symbols:arrow-outward-rounded">
                     </span>
                 </button>
