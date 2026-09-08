@@ -1,4 +1,37 @@
+document
+    .getElementById("searchInput")
+    .addEventListener("input", function () {
+
+        const keyword = this.value.toLowerCase().trim();
+
+        const searchSection = document.getElementById("searchSection");
+        const searchResults = document.getElementById("searchResults");
+        const bookContent = document.getElementById("bookContent");
+
+        if (keyword === "") {
+            searchSection.classList.add("hidden");
+            bookContent.classList.remove("hidden");
+            searchResults.innerHTML = "";
+            return;
+        }
+
+        const filtered = books.filter(book =>
+            book.name.toLowerCase().includes(keyword) ||
+            book.author.toLowerCase().includes(keyword) ||
+            book.category.toLowerCase().includes(keyword)
+        );
+
+        bookContent.classList.add("hidden");
+        searchSection.classList.remove("hidden");
+
+        searchResults.innerHTML = filtered
+            .map(book => bookCard(book))
+            .join("");
+    });
+
+
 function bookCard(book, showCategory = false) {
+
     return `
         <div class="book-card min-w-0 flex-col cursor-pointer" onclick="openBookDetail(${book.id})">
 
@@ -78,6 +111,7 @@ function openBookDetail(bookId) {
     document.getElementById("detailDescription").textContent =
         book.description || "No description available.";
 
+    // Tampilkan overlay
     const overlay = document.getElementById("bookSidebar");
     const sidebar = document.getElementById("bookDetail");
 
@@ -102,66 +136,6 @@ function closeBookDetail() {
 }
 
 document.getElementById("closeButton").addEventListener("click", closeBookDetail);
-
-const lastReadBooks =
-    document.getElementById("last-read-books");
-
-const lastReadColors = [
-    "#8B543C",
-    "#3D657A",
-    "#3E4D55",
-    "#6B536B",
-    "#596B4F"
-];
-
-lastReadBooks.innerHTML = books 
-    .slice(0, 5) 
-    .map((book, index) => ` 
-         
-        <div 
-            class="group relative flex h-[120px] w-[295px] shrink-0 items-center rounded-[16px] px-4 pl-[115px]" 
-            style="background-color: ${lastReadColors[index % lastReadColors.length]};"
-            
-        > 
- 
-            <div class="absolute left-[10px] top-[-27px] h-[138px] w-[90px] overflow-visible shadow-sm" > 
-                <img 
-                    src="${book.image}" 
-                    alt="${book.name}" 
-                    class="h-full w-full object-cover transition-all duration-300 ease-out group-hover:-translate-y-2 group-hover:scale-[1.02] group-hover:rotate-[1deg] group-hover:shadow-xl" 
-                > 
-            </div> 
- 
-            <div class="min-w-0 text-white"> 
- 
-                <p class="line-clamp-2 text-lg font-semibold leading-[1.25] font-medium"> 
-                    ${book.name} 
-                </p> 
- 
-                <p class="mt-4 text-xs font-normal text-white"> 
-                    ${book.rating.rate} ★ · ${book.author} 
-                </p> 
- 
-                <p class="pt-1 text-xs font-normal text-white/80"> 
-                    ${book.stock} available · ${book.year} 
-                </p> 
- 
-            </div> 
- 
-        </div> 
- 
-    `) 
-    .join("");
-
-
-
-document.getElementById("recommend-books").innerHTML =
-    books
-        .slice(0, 6)
-        .map(book => bookCard(book))
-        .join("");
-
-
 
 document.getElementById("new-release-books").innerHTML =
     books
@@ -242,57 +216,7 @@ function filterCategory(category) {
             }
         });
 }
-
 filterCategory("Novel");
-
-
-const searchInput = document.getElementById("searchInput");
-const searchSection = document.getElementById("searchSection");
-const searchResults = document.getElementById("searchResults");
-const dashboard = document.getElementById("dashboard");
-
-searchInput.addEventListener("input", function () {
-    const keyword = this.value.toLowerCase().trim();
-
-    // Kalau search kosong → kembali ke dashboard normal
-    if (keyword === "") {
-        searchSection.classList.add("hidden");
-        dashboard.classList.remove("hidden");
-        searchResults.innerHTML = "";
-        return;
-    }
-
-    // Saat searching → dashboard disembunyikan
-    dashboard.classList.add("hidden");
-    searchSection.classList.remove("hidden");
-
-    // Cari berdasarkan nama, author, atau kategori
-    const filtered = books.filter(book =>
-        book.name.toLowerCase().includes(keyword) ||
-        book.author.toLowerCase().includes(keyword) ||
-        book.category.toLowerCase().includes(keyword)
-    );
-
-    // Kalau tidak ada hasil
-    if (filtered.length === 0) {
-        searchResults.innerHTML = `
-            <div class="col-span-full py-16 text-center">
-                <p class="text-lg font-medium text-gray-700">
-                    Book not found
-                </p>
-                <p class="mt-1 text-sm text-gray-400">
-                    Try another keyword.
-                </p>
-            </div>
-        `;
-        return;
-    }
-
-    // Tampilkan hasil pencarian
-    searchResults.innerHTML = filtered
-        .map(book => bookCard(book, true))
-        .join("");
-});
 
 const collections = [
     {
@@ -333,7 +257,7 @@ collectionsContainer.innerHTML = collections
 
         return `
             <div
-                class="flex relative h-[120px] overflow-hidden rounded-lg p-4 items-center"
+                class="relative flex h-[120px] items-center overflow-hidden rounded-lg p-4"
                 style="background-color: ${collection.color};"
             >
 
@@ -347,7 +271,7 @@ collectionsContainer.innerHTML = collections
                         ${collection.title}
                     </h3>
 
-                    <p class=" text-[10px] text-white/70">
+                    <p class="text-[10px] text-white/70">
                         ${totalBooks} Books
                     </p>
 
@@ -363,6 +287,36 @@ collectionsContainer.innerHTML = collections
     })
     .join("");
 
+const menuItems = document.querySelectorAll(".sidebar-menu");
+
+menuItems.forEach(item => {
+
+    item.addEventListener("click", function (e) {
+
+        e.preventDefault();
+
+        menuItems.forEach(menu => {
+
+            menu.classList.remove(
+                "bg-[#001642]",
+                "text-white"
+            );
+
+            menu.classList.add(
+                "text-gray-700"
+            );
+        });
+
+        this.classList.remove(
+            "text-gray-700"
+        );
+
+        this.classList.add(
+            "bg-[#001642]",
+            "text-white"
+        );
+    });
+});
 
 const navbar = document.getElementById("navbar");
 
@@ -370,9 +324,9 @@ window.addEventListener("scroll", () => {
 
     if (window.scrollY > 30) {
         navbar.classList.add("scrolled");
+
     } else {
         navbar.classList.remove("scrolled");
-
     }
 
 });
