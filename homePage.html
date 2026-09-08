@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+    <!-- Tailwind -->
+    <link href="./src/output.css" rel="stylesheet">
+
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        .serif {
+            font-family: 'GFS Didot', serif;
+        }
+
+        #navbar {
+            transition:
+                width 0.3s ease,
+                top 0.3s ease,
+                left 0.3s ease,
+                transform 0.3s ease,
+                border-radius 0.3s ease,
+                padding 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        #navbar.scrolled {
+            width: calc(100% - 250px);
+            left: 150px;    
+            border-radius: 24px;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .book-card {
+            perspective: 800px;
+        }
+
+        .book-card > div:first-child {
+            position: relative;
+            transition: transform 0.4s ease;
+            transform-origin: center;
+        }
+
+        .book-card:hover > div:first-child {
+            transform: rotateY(-10deg) rotateZ(-2deg) translateY(-5px);
+        }
+
+        .book-card > div:first-child::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 3px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.35);
+            opacity: 0;
+            transform: translateX(-50%);
+            transition: opacity 0.4s ease;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <nav id="navbar" class="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-[#001642] px-20 py-6 transition-all duration-300 ease-in-out">
+        <div id="navbar-logo" class="text-3xl font-semibold tracking-wider text-white transition-all duration-300">
+            BOOKS
+        </div>
+
+        <div id="navbar-search" class="flex w-[300px] items-center rounded-2xl bg-white px-5 py-2 transition-all duration-300">
+            <iconify-icon
+                icon="bi:search"
+                class="mr-2 text-xl text-gray-500">
+            </iconify-icon>
+
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="Search book..."
+                class="w-full bg-transparent text-sm outline-none"
+            >
+        </div>
+
+        <div id="navbar-menu" class="flex gap-8 text-sm font-semibold text-white">
+            <a href="#Home"class="group relative py-2 transition-colors duration-300 hover:text-[#DDB967]">
+                Home
+                <span class="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-[#DDB967] transition-all duration-300 group-hover:w-full"></span>
+            </a>
+
+            <a href="katalog.html"
+            class="group relative py-2 transition-colors duration-300 hover:text-[#DDB967]">
+                Catalog
+                <span class="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-[#DDB967] transition-all duration-300 group-hover:w-full"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="relative h-screen overflow-hidden">
+        <img 
+            src="assets/bg_2.png" 
+            class="absolute inset-0 h-full w-full object-cover"
+            alt="Library"
+        >
+
+        <div class="relative z-10 flex h-full w-1/2 flex-col justify-center px-16">
+            <p class="mb-6 text-xl font-medium uppercase tracking-[0.15em] text-gray-600">
+                Welcome to Our Library
+            </p>
+
+            <h1 class="text-[80px] font-semibold text-gray-900 leading-[1]">
+                <span class="italic">The </span>
+                <span class="Bodoni Moda text-[#001642]">Reading </span>
+                <span class="italic">Hour</span>
+            </h1>
+
+            <p class="mt-6 max-w-md text-lg leading-7 text-gray-600">
+                Take a moment, open a book, and discover
+                something new. Your next story starts here.
+            </p>
+
+            <button class="mt-7 w-fit rounded-full bg-[#001642] px-7 py-3 text-sm font-medium text-white hover:bg-gray-800">
+                Explore Books
+            </button>
+        </div>
+    </div>
+
+    <section id="searchSection" class="mx-20 my-10 hidden">
+        <h2 class="serif mb-6 text-3xl font-semibold text-gray-800">
+            Search Result
+        </h2>
+
+        <div id="searchResults" class="grid grid-cols-6 gap-x-4 gap-y-5">
+        </div>
+    </section>
+
+    <section id="bookContent" class="my-10 mx-20">
+        <div>
+            <h2 class="serif mb-3 text-3xl font-semibold text-gray-800">
+                New release
+            </h2>
+
+            <div id="new-release-books" class="grid grid-cols-6 gap-x-4 gap-y-5 mt-6">
+            </div>
+        </div>
+
+        <div class="mt-12">
+            <h2 class="serif mb-3 text-3xl font-semibold text-gray-800">
+                Categories
+            </h2>
+
+            <div id="category-list" class="hide-scrollbar mb-5 flex gap-2 overflow-x-auto mt-6"> <!--buat filter buku-->
+            </div>
+
+            <div id="category-books" class="grid grid-cols-6 gap-x-4 gap-y-5"> <!--tampilin buku sesuai filter-->
+            </div>
+        </div>
+
+        <div class="mt-10">
+            <div class="mb-4 flex items-center justify-between">
+                <h2 class="serif text-3xl font-semibold text-gray-800">
+                    Collections
+                </h2>
+            </div>
+
+            <div
+                id="collections"
+                class="grid grid-cols-4 gap-4">
+            </div>
+        </div>
+
+        <div id="bookSidebar" class="fixed inset-0 z-40 hidden bg-black/40 backdrop-blur-sm" onclick="closeBookDetail()"></div>
+
+        <aside id="bookDetail" class="fixed right-0 top-0 z-50 h-full w-full max-w-md translate-x-full overflow-y-auto bg-[#06245C] text-white shadow-2xl transition-transform duration-300">
+            <div class="absolute right-5 top-5 flex items-center gap-2">
+                <button id="editButton" type="button" title="Edit Book" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20">
+                    <iconify-icon
+                        icon="material-symbols:edit-outline-rounded"
+                        class="text-lg">
+                    </iconify-icon>
+                </button>
+                
+                <button id="deleteButton" type="button" title="Delete Book" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-red-500/30 hover:text-red-300">
+                    <iconify-icon
+                        icon="material-symbols:delete-outline-rounded"
+                        class="text-lg">
+                    </iconify-icon>
+                </button>
+
+                <button id="closeButton" type="button" title="Close" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20">
+                    <iconify-icon 
+                        icon="material-symbols:close-rounded"
+                        class="iconify text-lg" >
+                    </iconify-icon>
+                </button>
+            </div>
+
+            <div class="px-7 pb-10 pt-20">
+                <div class="mx-auto mb-6 h-[240px] w-[155px] overflow-hidden rounded-lg bg-white p-1 shadow-xl">
+                    <img
+                        id="detailImage"
+                        src=""
+                        alt="Book Cover"
+                        class="h-full w-full object-cover"
+                    >
+                </div>
+
+                <div class="text-center">
+                    <h2 id="detailTitle" class="text-2xl font-semibold leading-tight">
+                        -
+                    </h2>   
+                    <p id="detailAuthor" class="mt-2 text-sm text-white/60">
+                        -
+                    </p>
+                </div>
+
+                <div class="mt-4 flex items-center justify-center gap-2">
+                    <div id="detailRatingStars" class="flex items-center gap-0.5 text-yellow-400">
+                    </div>
+                    <span id="detailRating" class="text-sm font-medium text-white/80">
+                        0.0
+                    </span>
+                </div>
+                
+                <div class="my-7 grid grid-cols-3 border-y border-white/10 py-5 text-center">
+                    <div>
+                        <p id="detailPages" class="text-sm font-semibold">
+                            -
+                        </p>
+                        <span class="mt-1 block text-[11px] text-white/50">
+                            Pages
+                        </span>
+                    </div>
+
+                    <div>
+                        <p id="detailReviews" class="text-sm font-semibold">
+                            -
+                        </p>
+                        <span class="mt-1 block text-[11px] text-white/50">
+                            Review
+                        </span>
+                    </div>
+
+                    <div>
+                        <p id="detailCategory" class="text-sm font-semibold">
+                            -
+                        </p>
+                        <span class="mt-1 block text-[11px] text-white/50">
+                            Category
+                        </span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="mb-2 text-sm font-semibold">
+                        About this book
+                    </h3>
+
+                    <p id="detailDescription" class="text-sm leading-6 text-white/65">
+                        No description available.
+                    </p>
+                </div>
+
+                <button id="readButton" class="mt-8 flex w-full items-center justify-center gap-2 rounded-lg bg-blue-500 px-5 py-3 text-sm font-semibold transition hover:bg-blue-400">
+                    Read No
+                    <span class="iconify text-lg" data-icon="material-symbols:arrow-outward-rounded">
+                    </span>
+                </button>
+                
+            </div>
+        </aside>
+    </section>
+
+    <footer class="flex justify-center items-center bg-[#001642]">
+            <div class="mx-auto w-full max-w-screen-xl">
+                <div class="grid grid-cols-2 gap-14 px-4 py-6 lg:py-8 md:grid-cols-4">
+    
+                    <div class="flex text-center justify-center items-center">
+                        <h1 class="text-6xl font-bold text-white">
+                            BOOKS
+                        </h1>
+                    </div>
+    
+                    <div>
+                        <h2 class="mb-6 text-sm font-bold uppercase text-white">
+                            Quick Links
+                        </h2>
+                        <ul>
+                            <li class="mb-2">
+                                <a href="#" class="hover:underline text-white">
+                                    Home
+                                </a>
+                            </li>
+    
+                            <li class="mb-2">
+                                <a href="#" class="hover:underline text-white">
+                                    Books
+                                </a>
+                            </li>
+    
+                            <li class="mb-2">
+                                <a href="#" class="hover:underline text-white">
+                                    Categories
+                                </a>
+                            </li>
+    
+                            <li class="mb-2">
+                                <a href="#" class="hover:underline text-white">
+                                    Collection
+                                </a>
+                            </li>
+    
+                            <li class="mb-2">
+                                <a href="#" class="hover:underline text-white">
+                                    About Us
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+    
+                    <div>
+                        <h2 class="mb-6 text-sm font-bold uppercase text-white">
+                            Library
+                        </h2>
+    
+                        <ul>
+                            <li class="mb-2">
+                                <a href="#" class="hover:underline text-white">
+                                    New Releases
+                                </a>
+                            </li>
+    
+                            <li class="mb-2">
+                                <a href="#" class="hover:underline text-white">
+                                    Popular Books
+                                </a>
+                            </li>
+    
+                            <li class="mb-2">
+                                <a href="#" class="hover:underline text-white">
+                                    Recommended
+                                </a>
+                            </li>
+    
+                            <li class="mb-2">
+                                <a href="#" class="hover:underline text-white">
+                                    All books
+                                </a>
+                            </li>
+    
+                            <li class="mb-2">
+                                <a href="#" class="hover:underline text-white">
+                                    Best Categories
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+    
+                    <div>
+                        <h2 class="mb-6 text-sm font-bold uppercase text-white">
+                            Contact Us
+                        </h2>
+    
+                        <ul>
+                            <li class="mb-2 flex items-start gap-2">
+    
+                                <iconify-icon
+                                    icon="mdi:location"
+                                    class="text-white">
+                                </iconify-icon>
+    
+                                <div class="hover:underline text-white">
+                                    Books <br>
+                                    bandung, braga, Indonesia
+                                </div>
+    
+                            </li>
+    
+    
+                            <li class="mb-2 flex items-start gap-2">
+    
+                                <iconify-icon
+                                    icon="ic:outline-email"
+                                    class="text-white">
+                                </iconify-icon>
+    
+                                <div class="hover:underline text-white">
+                                    Books@gmail.com
+                                </div>
+    
+                            </li>
+    
+    
+                            <li class="mb-2 flex items-start gap-2">
+    
+                                <iconify-icon
+                                    icon="ic:baseline-phone"
+                                    class="text-white">
+                                </iconify-icon>
+    
+                                <div class="hover:underline text-white">
+                                    +08-845-451-874
+                                </div>
+    
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="px-4 py-4 md:flex md:items-center md:justify-between">
+                    <span class="text-sm sm:text-center text-white">
+                        © 2026
+                        <a href="#">Books</a>.
+                        All Rights Reserved.
+                    </span>
+    
+                    <div class="flex mt-2 sm:justify-center md:mt-0 space-x-2 rtl:space-x-reverse gap-4 text-2xl">
+    
+                        <iconify-icon icon="skill-icons:instagram"></iconify-icon>
+    
+                        <iconify-icon icon="skill-icons:twitter"></iconify-icon>
+    
+                        <iconify-icon icon="skill-icons:linkedin"></iconify-icon>
+    
+                        <iconify-icon icon="devicon:facebook"></iconify-icon>
+                    </div>
+                </div>
+            </div>
+    </footer>
+
+    <script src="homepage.js"></script>
+    <script src="sidebar.js"></script>
+</body>
+</html>

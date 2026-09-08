@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Book</title>
+
+    <!-- Tailwind CSS -->
+    <link href="./src/output.css" rel="stylesheet">
+
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+
+    <style>
+        .serif {
+            font-family: 'GFD Didot', serif;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-[#001642]">
+
+    <nav class="fixed left-0 right-0 top-0 z-50 h-16 bg-white shadow-md">
+
+        <div class="flex h-full items-center justify-between px-8">
+            <div class="flex items-center justify-center gap-6">
+                <button class="flex items-center justify-center gap-2 text-sm font-semibold text-[#001642] transition hover:opacity-70">
+                    <a href="katalog.html">
+                        <iconify-icon 
+                            icon="material-symbols:arrow-back-rounded"
+                            class="text-2xl">
+                        </iconify-icon>
+                    </a>
+                </button>
+
+                <div class="text-3xl font-semibold tracking-wider text-[#001642] transition-all duration-300">
+                    BOOKS
+                </div>
+            </div>
+
+            <div class="text-sm text-gray-500">
+                Library Management
+            </div>
+        </div>
+
+    </nav>
+
+    <main class="px-12 pb-12 pt-24">
+
+        <div class="mx-auto max-w-6xl">
+            <div class="min-h-[600px] overflow-hidden rounded-2xl bg-white shadow-md">
+                <section class="p-10">
+                    
+                    <div class="mb-8">
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <h1 class="text-3xl font-bold text-[#001642]">
+                                    Edit Book
+                                </h1>
+
+                                <p class="mt-1 text-sm text-gray-500">
+                                    Update the information of this book
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="editBookForm">
+                        <div class="grid grid-cols-2 gap-6">
+
+                            <div class="col-span-2">
+                                <label for="editImage" class="mb-2 block text-sm font-semibold text-gray-700"> Image URL
+                                </label>
+
+                                <input
+                                    id="editImage"
+                                    type="url"
+                                    placeholder="Enter image URL"
+                                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-[#001642] focus:ring-1 focus:ring-[#001642]/10"
+                                >
+                            </div>
+
+                            <div class="col-span-2">
+                                <label for="editTitle" class="mb-2 block text-sm font-semibold text-gray-700">Name</label>
+
+                                <input
+                                    id="editTitle"
+                                    type="text"
+                                    required
+                                    placeholder="Enter book title"
+                                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-[#001642] focus:ring-1 focus:ring-[#001642]/10"
+                                >
+                            </div>
+
+                            <div>
+                                <label for="editAuthor" class="mb-2 block text-sm font-semibold text-gray-700">
+                                    Author
+                                </label>
+
+                                <input
+                                    id="editAuthor"
+                                    type="text"
+                                    required
+                                    placeholder="Enter author name"
+                                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-[#001642] focus:ring-1 focus:ring-[#001642]/10"
+                                >
+                            </div>
+
+                            <div>
+                                <label for="editCategory" class="mb-2 block text-sm font-semibold text-gray-700">
+                                    Category
+                                </label>
+
+                                <select id="editCategory" required class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-[#001642] focus:ring-1 focus:ring-[#001642]/10">
+                                    <option value="">Select category</option>
+                                    <option value="Novel">Novel</option>
+                                    <option value="Romance">Romance</option>
+                                    <option value="Fantasy">Fantasy</option>
+                                    <option value="Science">Science</option>
+                                    <option value="History">History</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="editPublisher" class="mb-2 block text-sm font-semibold text-gray-700">
+                                    Publisher
+                                </label>
+
+                                <input
+                                    id="editPublisher"
+                                    type="text"
+                                    placeholder="Enter publisher name"
+                                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-[#001642] focus:ring-1 focus:ring-[#001642]/10"
+                                >
+                            </div>
+
+                            <div>
+                                <label for="editYear" class="mb-2 block text-sm font-semibold text-gray-700">
+                                    Year
+                                </label>
+
+                                <input
+                                    id="editYear"
+                                    type="number"
+                                    placeholder="Publication year"
+                                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-[#001642] focus:ring-1 focus:ring-[#001642]/10"
+                                >
+                            </div>
+
+                            <div>
+                                <label for="editPages" class="mb-2 block text-sm font-semibold text-gray-700">
+                                    Pages
+                                </label>
+
+                                <input
+                                    id="editPages"
+                                    type="number"
+                                    placeholder="Number of pages"
+                                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-[#001642] focus:ring-1 focus:ring-[#001642]/10"
+                                >
+                            </div>
+
+                            <div>
+                                <label for="editStock" class="mb-2 block text-sm font-semibold text-gray-700">
+                                    Stock
+                                </label>
+
+                                <input
+                                    id="editStock"
+                                    type="number"
+                                    placeholder="Stock quantity"
+                                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-[#001642] focus:ring-1 focus:ring-[#001642]/10"
+                                >
+                            </div>
+
+                            <div>
+                                <label for="editRating" class="mb-2 block text-sm font-semibold text-gray-700">
+                                    Rating
+                                </label>
+
+                                <select id="editRating" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-[#001642] focus:ring-1 focus:ring-[#001642]/10">
+                                    <option value="">Select rating</option>
+                                    <option value="5.0">5.0</option>
+                                    <option value="4.5">4.5</option>
+                                    <option value="4.0">4.0</option>
+                                    <option value="3.5">3.5</option>
+                                    <option value="3.0">3.0</option>
+                                </select>
+                            </div>
+
+                            <div class="col-span-2">
+                                <label for="editDescription" class="mb-2 block text-sm font-semibold text-gray-700">
+                                    Description
+                                </label>
+
+                                <textarea
+                                    id="editDescription"
+                                    rows="5"
+                                    placeholder="Enter book description..."
+                                    class="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-[#001642] focus:ring-1 focus:ring-[#001642]/10">
+                                </textarea>
+                            </div>
+                        </div>
+
+                        <div class="mt-6">
+                            <label class="mb-3 block text-sm font-semibold text-gray-700">
+                                Book Cover Preview
+                            </label>
+
+                            <div class="flex h-48 w-32 items-center justify-center overflow-hidden rounded-lg border border-gray-300 bg-gray-100">
+                                <img
+                                    id="imagePreview"
+                                    src=""
+                                    alt="Book Cover Preview"
+                                    class="hidden h-full w-full object-cover"
+                                >
+
+                                <iconify-icon
+                                    id="previewIcon"
+                                    icon="material-symbols:image-rounded"
+                                    class="text-4xl text-gray-300">
+                                </iconify-icon>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex justify-end gap-3">
+                            <a href="katalog.html" type="button"  class="rounded-lg border border-gray-300 px-8 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-100">
+                                Cancel
+                            </a>
+
+                            <button type="submit" class="rounded-lg bg-[#001642] px-8 py-3 text-sm font-semibold text-white transition hover:bg-[#06245C]">
+                                Save Changes
+                            </button>
+                        </div>
+                    </form>
+
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="editPage.js"></script>
+</body>
+
+</html>

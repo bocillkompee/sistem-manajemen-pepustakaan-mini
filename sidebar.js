@@ -1,5 +1,6 @@
-function generateRatingStars(rating) {
+let currentBookId = null;
 
+function generateRatingStars(rating) {
     rating = Number(rating) || 0;
     let stars = "";
     for (let i = 1; i <= 5; i++) {
@@ -17,23 +18,24 @@ function generateRatingStars(rating) {
                     icon="material-symbols:star-half-rounded"
                 ></iconify-icon>
             `;
-
         } else {
             stars += `
                 <iconify-icon
                     class="iconify text-[18px]"
                     icon="material-symbols:star-outline-rounded"
                 ></iconify-icon>
-                
             `;
         }
     }
     return stars;
 }
-function openBookDetail(bookId) {
 
+function openBookDetail(bookId) {
     const book = books.find(book => book.id === bookId);
     if (!book) return;
+
+    currentBookId = bookId;
+
     document.getElementById("detailImage").src =
         book.image;
 
@@ -75,11 +77,9 @@ function openBookDetail(bookId) {
         .remove("translate-x-full");
 
     document.body.classList.add("overflow-hidden");
-
 }
 
 function closeBookDetail() {
-
     document
         .getElementById("bookDetail")
         .classList
@@ -91,12 +91,39 @@ function closeBookDetail() {
         .add("hidden");
 
     document.body.classList.remove("overflow-hidden");
-
 }
+
+document.getElementById("closeButton").onclick = function () {
+    closeBookDetail();
+};
 
 document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
         closeBookDetail();
     }
+});
 
+function showAddBook() {
+    document.getElementById("dashboard").classList.add("hidden");
+    document.getElementById("addBookPage").classList.remove("hidden");
+}
+
+
+function showDashboard() {
+    document.getElementById("addBookPage").classList.add("hidden");
+    document.getElementById("dashboard").classList.remove("hidden");
+}
+
+function cancelAddBook() {
+    document.getElementById("addBookForm").reset();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const editButton = document.getElementById("editButton");
+
+    if (editButton) {
+        editButton.onclick = function () {
+            window.location.href = "editPage.html";
+        };
+    }
 });
