@@ -275,6 +275,9 @@
   .col-span-2 {
     grid-column: span 2 / span 2;
   }
+  .col-span-full {
+    grid-column: 1 / -1;
+  }
   .mx-20 {
     margin-inline: calc(var(--spacing) * 20);
   }
@@ -319,7 +322,6 @@
   }
   .mt-12 {
     margin-top: calc(var(--spacing) * 12);
-  }
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
   }
@@ -421,7 +423,6 @@
   }
   .w-1\/2 {
     width: calc(1 / 2 * 100%);
-  }
   .w-9 {
     width: calc(var(--spacing) * 9);
   }
@@ -473,15 +474,13 @@
   .flex-1 {
     flex: 1;
   }
-  .flex-shrink {
-    flex-shrink: 1;
-  }
   .shrink-0 {
     flex-shrink: 0;
   }
+  .flex-shrink {
+    flex-shrink: 1;
   .border-collapse {
     border-collapse: collapse;
-  }
   .translate-x-full {
     --tw-translate-x: 100%;
     translate: var(--tw-translate-x) var(--tw-translate-y);
@@ -793,6 +792,9 @@
   .py-10 {
     padding-block: calc(var(--spacing) * 10);
   }
+  .py-16 {
+    padding-block: calc(var(--spacing) * 16);
+  }
   .py-\[2px\] {
     padding-block: 2px;
   }
@@ -872,8 +874,6 @@
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
   }
-  .text-\[00px\] {
-    font-size: 00px;
   }
   .text-\[10px\] {
     font-size: 10px;
@@ -907,10 +907,8 @@
   }
   .text-\[100px\] {
     font-size: 100px;
-  }
   .text-\[200px\] {
     font-size: 200px;
-  }
   .leading-6 {
     --tw-leading: calc(var(--spacing) * 6);
     line-height: calc(var(--spacing) * 6);
@@ -922,23 +920,18 @@
   .leading-\[0\.1\] {
     --tw-leading: 0.1;
     line-height: 0.1;
-  }
   .leading-\[0\.85\] {
     --tw-leading: 0.85;
     line-height: 0.85;
-  }
   .leading-\[0\.100\] {
     --tw-leading: 0.100;
     line-height: 0.100;
-  }
   .leading-\[0\.110\] {
     --tw-leading: 0.110;
     line-height: 0.110;
-  }
   .leading-\[0\.\] {
     --tw-leading: 0.;
     line-height: 0.;
-  }
   .leading-\[1\.25\] {
     --tw-leading: 1.25;
     line-height: 1.25;
@@ -978,27 +971,21 @@
   .tracking-\[0\.15em\] {
     --tw-tracking: 0.15em;
     letter-spacing: 0.15em;
-  }
   .tracking-\[0\.25em\] {
     --tw-tracking: 0.25em;
     letter-spacing: 0.25em;
-  }
   .tracking-\[0\.50em\] {
     --tw-tracking: 0.50em;
     letter-spacing: 0.50em;
-  }
   .tracking-\[0\.\] {
     --tw-tracking: 0.;
     letter-spacing: 0.;
-  }
   .tracking-\[0\.em\] {
     --tw-tracking: 0.em;
     letter-spacing: 0.em;
-  }
   .tracking-\[0em\] {
     --tw-tracking: 0em;
     letter-spacing: 0em;
-  }
   .tracking-tight {
     --tw-tracking: var(--tracking-tight);
     letter-spacing: var(--tracking-tight);
@@ -1016,18 +1003,15 @@
   .text-\[\#34566c\] {
     color: #34566c;
   }
-  .text-\[20p\] {
-    color: 20p;
-  }
   .text-gray-300 {
     color: var(--color-gray-300);
   }
+  .text-gray-400 {
+    color: var(--color-gray-400);
   .text-gray-500 {
     color: var(--color-gray-500);
-  }
   .text-gray-600 {
     color: var(--color-gray-600);
-  }
   .text-gray-700 {
     color: var(--color-gray-700);
   }
@@ -1090,7 +1074,6 @@
   }
   .underline {
     text-decoration-line: underline;
-  }
   .shadow-2xl {
     --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -1197,16 +1180,14 @@
       --tw-shadow: 0 20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
       box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
     }
-    .hover\:-translate-y-0\.5:hover {
-      --tw-translate-y: calc(var(--spacing) * -0.5);
-      translate: var(--tw-translate-x) var(--tw-translate-y);
-    }
     .hover\:border-\[\#001642\]:hover {
       border-color: #001642;
     }
+    .hover\:-translate-y-0\.5:hover {
+      --tw-translate-y: calc(var(--spacing) * -0.5);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
     .hover\:bg-\[\#001642\]:hover {
       background-color: #001642;
-    }
     .hover\:bg-\[\#06245C\]:hover {
       background-color: #06245C;
     }
@@ -1240,7 +1221,6 @@
       .hover\:bg-white\/10:hover {
         background-color: color-mix(in oklab, var(--color-white) 10%, transparent);
       }
-    }
     .hover\:bg-white\/20:hover {
       background-color: color-mix(in srgb, #fff 20%, transparent);
     }
