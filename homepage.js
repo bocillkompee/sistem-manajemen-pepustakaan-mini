@@ -1,4 +1,3 @@
-//homepage.js
 document
     .getElementById("searchInput")
     .addEventListener("input", function () {
@@ -61,6 +60,82 @@ function bookCard(book, showCategory = false) {
         </div>
     `;
 }
+
+let currentBookId = null;
+
+function openBookDetail(bookId) {
+    const book = books.find(book => book.id == bookId);
+
+    if (!book) {
+        console.error("Book tidak ditemukan:", bookId);
+        return;
+    }
+
+    currentBookId = book.id;
+
+    document.getElementById("detailImage").src = book.image;
+    document.getElementById("detailTitle").textContent = book.name;
+    document.getElementById("detailAuthor").textContent = book.author;
+
+    const rating = Number(book.rating?.rate) || 0;
+
+    document.getElementById("detailRating").textContent =
+        rating.toFixed(1);
+
+    const stars = document.getElementById("detailRatingStars");
+
+    stars.innerHTML = "";
+
+    for (let i = 1; i <= 5; i++) {
+        stars.innerHTML += `
+            <iconify-icon
+                icon="${
+                    rating >= i
+                        ? "material-symbols:star-rounded"
+                        : "material-symbols:star-outline-rounded"
+                }"
+                class="text-[18px]"
+            ></iconify-icon>
+        `;
+    }
+
+    document.getElementById("detailPages").textContent =
+        book.pages ?? "-";
+
+    document.getElementById("detailReviews").textContent =
+        book.rating?.count ?? "-";
+
+    document.getElementById("detailCategory").textContent =
+        book.category ?? "-";
+
+    document.getElementById("detailDescription").textContent =
+        book.description || "No description available.";
+
+    // Tampilkan overlay
+    const overlay = document.getElementById("bookSidebar");
+    const sidebar = document.getElementById("bookDetail");
+
+    overlay.classList.remove("hidden");
+
+    setTimeout(() => {
+        sidebar.classList.remove("translate-x-full");
+    }, 10);
+}
+
+function closeBookDetail() {
+    const overlay = document.getElementById("bookSidebar");
+    const sidebar = document.getElementById("bookDetail");
+
+    sidebar.classList.add("translate-x-full");
+
+    setTimeout(() => {
+        overlay.classList.add("hidden");
+    }, 300);
+
+    currentBookId = null;
+}
+
+document.getElementById("closeButton").addEventListener("click", closeBookDetail);
 
 document.getElementById("new-release-books").innerHTML =
     books

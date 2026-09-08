@@ -1,5 +1,4 @@
 function bookCard(book, showCategory = false) {
-
     return `
         <div class="book-card min-w-0 flex-col cursor-pointer" onclick="openBookDetail(${book.id})">
 
@@ -29,7 +28,82 @@ function bookCard(book, showCategory = false) {
     `;
 }
 
+let currentBookId = null;
 
+function openBookDetail(bookId) {
+    const book = books.find(book => book.id == bookId);
+
+    if (!book) {
+        console.error("Book tidak ditemukan:", bookId);
+        return;
+    }
+
+    currentBookId = book.id;
+
+    document.getElementById("detailImage").src = book.image;
+    document.getElementById("detailTitle").textContent = book.name;
+    document.getElementById("detailAuthor").textContent = book.author;
+
+    const rating = Number(book.rating?.rate) || 0;
+
+    document.getElementById("detailRating").textContent =
+        rating.toFixed(1);
+
+    const stars = document.getElementById("detailRatingStars");
+
+    stars.innerHTML = "";
+
+    for (let i = 1; i <= 5; i++) {
+        stars.innerHTML += `
+            <iconify-icon
+                icon="${
+                    rating >= i
+                        ? "material-symbols:star-rounded"
+                        : "material-symbols:star-outline-rounded"
+                }"
+                class="text-[18px]"
+            ></iconify-icon>
+        `;
+    }
+
+    document.getElementById("detailPages").textContent =
+        book.pages ?? "-";
+
+    document.getElementById("detailReviews").textContent =
+        book.rating?.count ?? "-";
+
+    document.getElementById("detailCategory").textContent =
+        book.category ?? "-";
+
+    document.getElementById("detailDescription").textContent =
+        book.description || "No description available.";
+
+    // Tampilkan overlay
+    const overlay = document.getElementById("bookSidebar");
+    const sidebar = document.getElementById("bookDetail");
+
+    overlay.classList.remove("hidden");
+
+    setTimeout(() => {
+        sidebar.classList.remove("translate-x-full");
+    }, 10);
+}
+
+
+function closeBookDetail() {
+    const overlay = document.getElementById("bookSidebar");
+    const sidebar = document.getElementById("bookDetail");
+
+    sidebar.classList.add("translate-x-full");
+
+    setTimeout(() => {
+        overlay.classList.add("hidden");
+    }, 300);
+
+    currentBookId = null;
+}
+
+document.getElementById("closeButton").addEventListener("click", closeBookDetail);
 
 const lastReadBooks =
     document.getElementById("last-read-books");
@@ -174,26 +248,51 @@ function filterCategory(category) {
 filterCategory("Novel");
 
 
-document
-    .getElementById("searchInput")
-    .addEventListener("input", function () {
+const searchInput = document.getElementById("searchInput");
+const searchSection = document.getElementById("searchSection");
+const searchResults = document.getElementById("searchResults");
+const dashboard = document.getElementById("dashboard");
 
-        const keyword =
-            this.value.toLowerCase().trim();
+searchInput.addEventListener("input", function () {
+    const keyword = this.value.toLowerCase().trim();
 
-        const filtered = books.filter(book =>
-            book.name.toLowerCase().includes(keyword) ||
-            book.author.toLowerCase().includes(keyword) ||
-            book.category.toLowerCase().includes(keyword)
-        );
+    // Kalau search kosong → kembali ke dashboard normal
+    if (keyword === "") {
+        searchSection.classList.add("hidden");
+        dashboard.classList.remove("hidden");
+        searchResults.innerHTML = "";
+        return;
+    }
 
-        document.getElementById("recommend-books").innerHTML =
-            filtered
-                .slice(0, 6)
-                .map(book => bookCard(book))
-                .join("");
-    });
+    dashboard.classList.add("hidden");
+    searchSection.classList.remove("hidden");
 
+    // Cari berdasarkan nama, author, atau kategori
+    const filtered = books.filter(book =>
+        book.name.toLowerCase().includes(keyword) ||
+        book.author.toLowerCase().includes(keyword) ||
+        book.category.toLowerCase().includes(keyword)
+    );
+
+    // Kalau tidak ada hasil
+    if (filtered.length === 0) {
+        searchResults.innerHTML = `
+            <div class="col-span-full py-16 text-center">
+                <p class="text-lg font-medium text-gray-700">
+                    Book not found
+                </p>
+                <p class="mt-1 text-sm text-gray-400">
+                    Try another keyword.
+                </p>
+            </div>
+        `;
+        return;
+    }
+
+    searchResults.innerHTML = filtered
+        .map(book => bookCard(book, true))
+        .join("");
+});
 
 const collections = [
     {
