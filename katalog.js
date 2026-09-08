@@ -1,4 +1,3 @@
-//katalog.js
 function bookCard(book, showCategory = false) {
 
     return `
@@ -266,51 +265,13 @@ collectionsContainer.innerHTML = collections
     .join("");
 
 
-const menuItems = document.querySelectorAll(".sidebar-menu");
-
-menuItems.forEach(item => {
-
-    item.addEventListener("click", function (e) {
-
-        e.preventDefault();
-
-        menuItems.forEach(menu => {
-
-            menu.classList.remove(
-                "bg-[#001642]",
-                "text-white"
-            );
-
-            menu.classList.add(
-                "text-gray-700"
-            );
-        });
-
-        this.classList.remove(
-            "text-gray-700"
-        );
-
-        this.classList.add(
-            "bg-[#001642]",
-            "text-white"
-        );
-    });
-});
-
-
-
 const navbar = document.getElementById("navbar");
 
 window.addEventListener("scroll", () => {
 
     if (window.scrollY > 30) {
-
-        // Saat scroll → navbar jadi floating
         navbar.classList.add("scrolled");
-
     } else {
-
-        // Saat kembali ke paling atas → navbar kembali normal
         navbar.classList.remove("scrolled");
 
     }
