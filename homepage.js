@@ -1,33 +1,69 @@
-document
-    .getElementById("searchInput")
-    .addEventListener("input", function () {
+const searchInput = document.getElementById("searchInput");
+const searchPopup = document.getElementById("searchPopup");
 
-        const keyword = this.value.toLowerCase().trim();
+function searchResultItem(book) {
+    return `
+        <div
+            class="flex cursor-pointer items-center gap-3 rounded-lg p-2 transition hover:bg-gray-100"
+            onclick="openBookDetail(${book.id}); document.getElementById('searchPopup').classList.add('hidden');"
+        >
+            <img
+                src="${book.image}"
+                alt="${book.name}"
+                class="h-14 w-10 rounded-sm object-cover"
+            >
 
-        const searchSection = document.getElementById("searchSection");
-        const searchResults = document.getElementById("searchResults");
-        const bookContent = document.getElementById("bookContent");
+            <div class="min-w-0">
+                <p class="truncate text-sm font-medium text-gray-800">
+                    ${book.name}
+                </p>
+                <p class="truncate text-xs text-gray-500">
+                    ${book.author}
+                </p>
+            </div>
+        </div>
+    `;
+}
 
-        if (keyword === "") {
-            searchSection.classList.add("hidden");
-            bookContent.classList.remove("hidden");
-            searchResults.innerHTML = "";
-            return;
-        }
+searchInput.addEventListener("input", function () {
 
-        const filtered = books.filter(book =>
-            book.name.toLowerCase().includes(keyword) ||
-            book.author.toLowerCase().includes(keyword) ||
-            book.category.toLowerCase().includes(keyword)
-        );
+    const keyword = this.value.toLowerCase().trim();
 
-        bookContent.classList.add("hidden");
-        searchSection.classList.remove("hidden");
+    if (keyword === "") {
+        searchPopup.classList.add("hidden");
+        searchPopup.innerHTML = "";
+        return;
+    }
 
-        searchResults.innerHTML = filtered
-            .map(book => bookCard(book))
-            .join("");
-    });
+    const filtered = books.filter(book =>
+        book.name.toLowerCase().includes(keyword) ||
+        book.author.toLowerCase().includes(keyword) ||
+        book.category.toLowerCase().includes(keyword)
+    );
+
+    searchPopup.classList.remove("hidden");
+
+    if (filtered.length === 0) {
+        searchPopup.innerHTML = `
+            <div class="p-4 text-center text-sm text-gray-400">
+                Book not found.
+            </div>
+        `;
+        return;
+    }
+
+    searchPopup.innerHTML = filtered
+        .slice(0, 8)
+        .map(book => searchResultItem(book))
+        .join("");
+});
+
+// Tutup popup kalau klik di luar area search
+document.addEventListener("click", function (e) {
+    if (!document.getElementById("navbar-search").contains(e.target)) {
+        searchPopup.classList.add("hidden");
+    }
+});
 
 
 function bookCard(book, showCategory = false) {

@@ -70,7 +70,7 @@ const initialBooks = [
     year: 2018,
     pages: 320,
     stock: 21,
-    image: "https://i.pinimg.com/1200x/ee/20/d2/ee20d232056eca3d231720ef140a9485.jpg",
+    image: "https://i.pinimg.com/1200x/74/9c/73/749c735cbdd17cdd2c48585d85fc30e2.jpg",
     rating: { rate: 4.8, count: 367 }
   },
   {
