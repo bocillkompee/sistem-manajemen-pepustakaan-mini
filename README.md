@@ -36,19 +36,62 @@ Proyek ini dibuat secara berkelompok dengan menerapkan **Git dan GitHub** sebaga
 | 5 | Nisa | Quality Assurance (QA) |
 
 
-## 3. Cara Menjalankan Aplikasi/Proyek
+### 3. Cara Menjalankan Aplikasi/Proyek
 
-### 1. Clone Repository
+Bagian ini menjelaskan langkah-langkah untuk menjalankan Sistem Informasi Perpustakaan pada komputer.
+
+### A. Persyaratan Sistem
+
+Sebelum menjalankan aplikasi, pastikan komputer telah memiliki beberapa software berikut:
+
+- Git
+- Node.js
+- npm
+- Visual Studio Code
+- Web Browser seperti Google Chrome atau Microsoft Edge
+- Extension Live Server pada Visual Studio Code
+
+### B. Persiapan Proyek
+
+Sebelum menjalankan aplikasi, pastikan komputer memiliki koneksi internet yang baik karena diperlukan untuk melakukan clone repository dan menginstal dependency.
+
+### C. Clone Repository
 
 Clone repository dari GitHub menggunakan perintah berikut:
 
-bash
+```bash
 git clone https://github.com/bocillkompee/sistem-manajemen-pepustakaan-mini.git
 
 ## 4. Screenshot Tampilan Aplikasi
 
 ### Halaman Home
 
+## Halaman Home
+
 <p align="center">
-    <img src="images/home.png" width="800">
+  <img src="images/home.png" width="800">
+</p>
+
+## Halaman Login
+
+<p align="center">
+  <img src="images/login.jpeg" width="800">
+</p>
+
+## Tampilan Aplikasi
+
+<p align="center">
+  <img src="images/tampilan.png" width="800">
+</p>
+
+## Halaman Buku
+
+<p align="center">
+  <img src="images/buku.png" width="800">
+</p>
+
+## Flutter
+
+<p align="center">
+  <img src="images/flutter.png" width="800">
 </p>
