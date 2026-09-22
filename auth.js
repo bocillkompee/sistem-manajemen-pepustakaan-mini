@@ -51,7 +51,7 @@ function temukanAkun() {
         alert(`Login berhasil! Selamat datang, ${foundUser.name}`);
         
         // Arahkan ke halaman utama/dashboard perpus
-        window.location.href = 'index.html';
+       window.location.href = 'homePage.html';
     } else {
         // 4. Tampilkan pesan error di elemen <p id="pesan">
         if (pesanBox) {

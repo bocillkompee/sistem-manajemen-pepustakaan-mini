@@ -78,7 +78,6 @@ function openBookDetail(bookId) {
     document.getElementById("detailDescription").textContent =
         book.description || "No description available.";
 
-    // Tampilkan overlay
     const overlay = document.getElementById("bookSidebar");
     const sidebar = document.getElementById("bookDetail");
 
@@ -88,7 +87,6 @@ function openBookDetail(bookId) {
         sidebar.classList.remove("translate-x-full");
     }, 10);
 }
-
 
 function closeBookDetail() {
     const overlay = document.getElementById("bookSidebar");
@@ -264,6 +262,7 @@ searchInput.addEventListener("input", function () {
         return;
     }
 
+    // Saat searching → dashboard disembunyikan
     dashboard.classList.add("hidden");
     searchSection.classList.remove("hidden");
 
@@ -289,6 +288,7 @@ searchInput.addEventListener("input", function () {
         return;
     }
 
+    // Tampilkan hasil pencarian
     searchResults.innerHTML = filtered
         .map(book => bookCard(book, true))
         .join("");
