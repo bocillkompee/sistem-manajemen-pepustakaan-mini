@@ -77,8 +77,8 @@ code .
 
 Setelah project terbuka di Visual Studio Code:
 
-1. Buka file `index.html`.
-2. Klik kanan pada file `index.html`.
+1. Buka file `login.html`.
+2. Klik kanan pada file `login.html`.
 3. Pilih **Open with Live Server**.
 4. Aplikasi akan terbuka secara otomatis di browser.
 
